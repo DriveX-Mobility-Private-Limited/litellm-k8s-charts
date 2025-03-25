@@ -18,7 +18,7 @@ fullnameOverride: ""
 
 serviceAccount:
   # Specifies whether a service account should be created
-  create: false
+  create: true
   # Automatically mount a ServiceAccount's API credentials?
   automount: true
   # Annotations to add to the service account
@@ -44,8 +44,8 @@ securityContext: {}
 # A list of Kubernetes Secret objects that will be exported to the LiteLLM proxy
 #  pod as environment variables.  These secrets can then be referenced in the
 #  configuration file (or "litellm" ConfigMap) with `os.environ/<Env Var Name>`
-environmentSecrets: []
-  # - litellm-env-secret
+environmentSecrets:
+  - litellm-postgresql-credentials-prod
 
 # A list of Kubernetes ConfigMap objects that will be exported to the LiteLLM proxy
 #  pod as environment variables.  The ConfigMap kv-pairs can then be referenced in the
@@ -58,28 +58,28 @@ service:
   port: 4000
 
 ingress:
-  enabled: false
+  enabled: true
   className: "nginx"
-  annotations: {}
-    # kubernetes.io/ingress.class: nginx
-    # kubernetes.io/tls-acme: "true"
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    kubernetes.io/tls-acme: "true"
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    nginx.ingress.kubernetes.io/use-forwarded-headers: "true"
   hosts:
-    - host: api.example.local
+    - host: llmproxy.drivex.in
       paths:
         - path: /
           pathType: ImplementationSpecific
-  tls: []
-  #  - secretName: chart-example-tls
-  #    hosts:
-  #      - chart-example.local
-
-# masterkey: changeit
+  tls:
+   - secretName: litellm-prod-tls
+     hosts:
+       - llmproxy.drivex.in
 
 # if set, use this secret for the master key; otherwise, autogenerate a new one
-masterkeySecretName: ""
+masterkeySecretName: "litellm-postgresql-credentials-prod"
 
 # if set, use this secret key for the master key; otherwise, use the default key
-masterkeySecretKey: ""
+masterkeySecretKey: "LITELLM_MASTER_KEY"
 
 # The elements within proxy_config are rendered as config.yaml for the proxy
 #  Examples: https://github.com/BerriAI/litellm/tree/main/litellm/proxy/example_config_yaml
@@ -97,7 +97,11 @@ proxy_config:
         api_key: fake-key
         api_base: https://exampleopenaiendpoint-production.up.railway.app/
   general_settings:
+    analytics: true
     master_key: os.environ/PROXY_MASTER_KEY
+    admin_ui:
+      username: os.environ/UI_USERNAME
+      password: os.environ/UI_PASSWORD
 
 resources: {}
   # We usually recommend not to specify default resources and to leave this as a conscious
@@ -131,24 +135,33 @@ volumeMounts: []
 #   mountPath: "/etc/foo"
 #   readOnly: true
 
-nodeSelector: {}
+nodeSelector:
+  if-vision-pod: "true"
 
-tolerations: []
-
+tolerations:
+  - key: "if-monitoring-pod"
+    operator: "Equal"
+    value: "true"
+    effect: "NoSchedule"
+  - key: "if-vision-pod"
+    operator: "Equal"
+    value: "true"
+    effect: "NoSchedule"
+    
 affinity: {}
 
 db:
   # Use an existing postgres server/cluster
-  useExisting: false
+  useExisting: true
 
-  # How to connect to the existing postgres server/cluster
-  endpoint: localhost
+ # How to connect to the existing postgres server/cluster
+  endpoint: litellm-prod-postgresql
   database: litellm
   url: postgresql://$(DATABASE_USERNAME):$(DATABASE_PASSWORD)@$(DATABASE_HOST)/$(DATABASE_NAME)
   secret:
-    name: postgres
-    usernameKey: username
-    passwordKey: password
+    name: litellm-postgresql-credentials-prod
+    usernameKey: POSTGRES_USER
+    passwordKey: POSTGRES_PASSWORD
 
   # Use the Stackgres Helm chart to deploy an instance of a Stackgres cluster.
   #  The Stackgres Operator must already be installed within the target
@@ -165,13 +178,23 @@ db:
 postgresql:
   architecture: standalone
   auth:
-    username: litellm
-    database: litellm
-
+    existingSecret: "litellm-postgresql-credentials-prod"
+    secretKeys:
+      adminPasswordKey: POSTGRES_POSTGRES_PASSWORD
+      userPasswordKey: POSTGRES_PASSWORD
+      usernameKey: POSTGRES_USER
+      databaseKey: POSTGRES_DATABASE
+  primary:
+    persistence:
+      enabled: true
+      size: 50Gi
+      storageClass: gp2
+      selector: {}
+  extraEnvVarsCM: "litellm-prod-config"   
     # You should override these on the helm command line with
     #  `--set postgresql.auth.postgres-password=<some good password>,postgresql.auth.password=<some good password>`
-    password: NoTaGrEaTpAsSwOrD
-    postgres-password: NoTaGrEaTpAsSwOrD
+    # password: 
+    # postgres-password: 
 
     # A secret is created by this chart (litellm-helm) with the credentials that
     #  the new Postgres instance should use.
@@ -194,10 +217,8 @@ migrationJob:
   disableSchemaUpdate: false # Skip schema migrations for specific environments. When True, the job will exit with code 0.
   annotations: {}
   ttlSecondsAfterFinished: 120
-
+  
 # Additional environment variables to be added to the deployment
 envVars: {
     # USE_DDTRACE: "true"
 }
-
-
