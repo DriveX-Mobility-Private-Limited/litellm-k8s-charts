@@ -45,7 +45,7 @@ securityContext: {}
 #  pod as environment variables.  These secrets can then be referenced in the
 #  configuration file (or "litellm" ConfigMap) with `os.environ/<Env Var Name>`
 environmentSecrets:
-  - litellm-postgresql-credentials-prod
+  - litellm-postgresql-credentials
 
 # A list of Kubernetes ConfigMap objects that will be exported to the LiteLLM proxy
 #  pod as environment variables.  The ConfigMap kv-pairs can then be referenced in the
@@ -63,20 +63,20 @@ ingress:
   annotations:
     kubernetes.io/ingress.class: nginx
     kubernetes.io/tls-acme: "true"
-    cert-manager.io/cluster-issuer: letsencrypt-prod
+    cert-manager.io/cluster-issuer: letsencrypt-dev
     nginx.ingress.kubernetes.io/use-forwarded-headers: "true"
   hosts:
-    - host: llmproxy.drivex.in
+    - host: llmproxy.drivex.dev
       paths:
         - path: /
           pathType: ImplementationSpecific
   tls:
-   - secretName: litellm-prod-tls
+   - secretName: litellm-dev-tls
      hosts:
-       - llmproxy.drivex.in
+       - llmproxy.drivex.dev
 
 # if set, use this secret for the master key; otherwise, autogenerate a new one
-masterkeySecretName: "litellm-postgresql-credentials-prod"
+masterkeySecretName: "litellm-postgresql-credentials-dev"
 
 # if set, use this secret key for the master key; otherwise, use the default key
 masterkeySecretKey: "LITELLM_MASTER_KEY"
@@ -135,18 +135,9 @@ volumeMounts: []
 #   mountPath: "/etc/foo"
 #   readOnly: true
 
-nodeSelector:
-  if-vision-pod: "true"
+nodeSelector: {}
 
-tolerations:
-  - key: "if-monitoring-pod"
-    operator: "Equal"
-    value: "true"
-    effect: "NoSchedule"
-  - key: "if-vision-pod"
-    operator: "Equal"
-    value: "true"
-    effect: "NoSchedule"
+tolerations: {}
     
 affinity: {}
 
@@ -155,11 +146,11 @@ db:
   useExisting: true
 
  # How to connect to the existing postgres server/cluster
-  endpoint: litellm-prod-postgresql
+  endpoint: litellm-dev-postgresql
   database: litellm
   url: postgresql://$(DATABASE_USERNAME):$(DATABASE_PASSWORD)@$(DATABASE_HOST)/$(DATABASE_NAME)
   secret:
-    name: litellm-postgresql-credentials-prod
+    name: litellm-postgresql-credentials
     usernameKey: POSTGRES_USER
     passwordKey: POSTGRES_PASSWORD
 
@@ -178,7 +169,7 @@ db:
 postgresql:
   architecture: standalone
   auth:
-    existingSecret: "litellm-postgresql-credentials-prod"
+    existingSecret: "litellm-postgresql-credentials"
     secretKeys:
       adminPasswordKey: POSTGRES_POSTGRES_PASSWORD
       userPasswordKey: POSTGRES_PASSWORD
@@ -187,10 +178,10 @@ postgresql:
   primary:
     persistence:
       enabled: true
-      size: 50Gi
+      size: 8Gi
       storageClass: gp2
       selector: {}
-  extraEnvVarsCM: "litellm-prod-config"   
+  extraEnvVarsCM: "litellm-dev-config"   
     # You should override these on the helm command line with
     #  `--set postgresql.auth.postgres-password=<some good password>,postgresql.auth.password=<some good password>`
     # password: 
