@@ -146,7 +146,7 @@ db:
   useExisting: false
 
  # How to connect to the existing postgres server/cluster
-  endpoint: litellm-dev-postgresql
+  endpoint: localhost
   database: litellm
   url: postgresql://$(DATABASE_USERNAME):$(DATABASE_PASSWORD)@$(DATABASE_HOST)/$(DATABASE_NAME)
   secret:
@@ -173,8 +173,8 @@ postgresql:
     secretKeys:
       adminPasswordKey: POSTGRES_POSTGRES_PASSWORD
       userPasswordKey: POSTGRES_PASSWORD
-      usernameKey: POSTGRES_USER
-      databaseKey: POSTGRES_DATABASE
+    username: litellm
+    database: litellm
     password: NoTaGrEaTpAsSwOrD
     postgres-password: NoTaGrEaTpAsSwOrD  
   primary:
