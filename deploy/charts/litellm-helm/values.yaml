@@ -143,7 +143,7 @@ affinity: {}
 
 db:
   # Use an existing postgres server/cluster
-  useExisting: true
+  useExisting: false
 
  # How to connect to the existing postgres server/cluster
   endpoint: litellm-dev-postgresql
@@ -175,6 +175,8 @@ postgresql:
       userPasswordKey: POSTGRES_PASSWORD
       usernameKey: POSTGRES_USER
       databaseKey: POSTGRES_DATABASE
+    password: NoTaGrEaTpAsSwOrD
+    postgres-password: NoTaGrEaTpAsSwOrD  
   primary:
     persistence:
       enabled: true
