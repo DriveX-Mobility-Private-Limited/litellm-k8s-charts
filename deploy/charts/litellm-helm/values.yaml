@@ -45,7 +45,7 @@ securityContext: {}
 #  pod as environment variables.  These secrets can then be referenced in the
 #  configuration file (or "litellm" ConfigMap) with `os.environ/<Env Var Name>`
 environmentSecrets:
-  - litellm-postgresql-credentials-dev
+  - litellm-postgresql-credentials
 
 # A list of Kubernetes ConfigMap objects that will be exported to the LiteLLM proxy
 #  pod as environment variables.  The ConfigMap kv-pairs can then be referenced in the
@@ -76,7 +76,7 @@ ingress:
        - llmproxy.drivex.dev
 
 # if set, use this secret for the master key; otherwise, autogenerate a new one
-masterkeySecretName: "litellm-postgresql-credentials-dev"
+masterkeySecretName: "litellm-postgresql-credentials"
 
 # if set, use this secret key for the master key; otherwise, use the default key
 masterkeySecretKey: "LITELLM_MASTER_KEY"
@@ -150,7 +150,7 @@ db:
   database: litellm
   url: postgresql://$(DATABASE_USERNAME):$(DATABASE_PASSWORD)@$(DATABASE_HOST)/$(DATABASE_NAME)
   secret:
-    name: litellm-postgresql-credentials-dev
+    name: litellm-postgresql-credentials
     usernameKey: POSTGRES_USER
     passwordKey: POSTGRES_PASSWORD
 
@@ -169,7 +169,7 @@ db:
 postgresql:
   architecture: standalone
   auth:
-    existingSecret: "litellm-postgresql-credentials-dev"
+    existingSecret: "litellm-postgresql-credentials"
     secretKeys:
       adminPasswordKey: POSTGRES_POSTGRES_PASSWORD
       userPasswordKey: POSTGRES_PASSWORD
