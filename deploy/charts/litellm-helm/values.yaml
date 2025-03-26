@@ -181,8 +181,7 @@ postgresql:
     existingSecret: "litellm-postgresql-credentials-prod"
     secretKeys:
       adminPasswordKey: POSTGRES_POSTGRES_PASSWORD
-      usernameKey: POSTGRES_USER
-      databaseKey: POSTGRES_DATABASE
+      userPasswordKey: POSTGRES_PASSWORD
     username: litellm
     database: litellm  
     password: tPrGOgQdkzwpHAKeJDQj
