@@ -183,9 +183,10 @@ postgresql:
       adminPasswordKey: POSTGRES_POSTGRES_PASSWORD
       usernameKey: POSTGRES_USER
       databaseKey: POSTGRES_DATABASE
-    password: tPrGOgQdkzwpHAKeJDQj
     username: litellm
-    database: litellm
+    database: litellm  
+    password: tPrGOgQdkzwpHAKeJDQj
+    postgres-password: NoTaGrEaTpAsSwOrD 
   primary:
     persistence:
       enabled: true
