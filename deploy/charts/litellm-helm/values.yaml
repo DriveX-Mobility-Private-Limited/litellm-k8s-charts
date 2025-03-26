@@ -186,7 +186,7 @@ postgresql:
     username: litellm
     database: litellm  
     password: tPrGOgQdkzwpHAKeJDQj
-    postgres-password: NoTaGrEaTpAsSwOrD 
+    postgres-password: 5Mxn4BGmbflgtRCT9bKH 
   primary:
     persistence:
       enabled: true
