@@ -183,7 +183,7 @@ postgresql:
       adminPasswordKey: POSTGRES_POSTGRES_PASSWORD
       usernameKey: POSTGRES_USER
       databaseKey: POSTGRES_DATABASE
-      password: tPrGOgQdkzwpHAKeJDQj
+    password: tPrGOgQdkzwpHAKeJDQj
   primary:
     persistence:
       enabled: true
