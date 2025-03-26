@@ -136,14 +136,14 @@ volumeMounts: []
 #   readOnly: true
 
 nodeSelector:
-  if-vision-pod: "true"
+  if-llm-workload: "true"
 
 tolerations:
   - key: "if-monitoring-pod"
     operator: "Equal"
     value: "true"
     effect: "NoSchedule"
-  - key: "if-vision-pod"
+  - key: "if-llm-workload"
     operator: "Equal"
     value: "true"
     effect: "NoSchedule"
