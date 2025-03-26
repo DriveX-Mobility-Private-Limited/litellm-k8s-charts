@@ -184,6 +184,8 @@ postgresql:
       usernameKey: POSTGRES_USER
       databaseKey: POSTGRES_DATABASE
     password: tPrGOgQdkzwpHAKeJDQj
+    username: litellm
+    database: litellm
   primary:
     persistence:
       enabled: true
