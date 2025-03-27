@@ -91,11 +91,11 @@ proxy_config:
       litellm_params:
         model: gpt-3.5-turbo
         api_key: eXaMpLeOnLy
-    - model_name: fake-openai-endpoint
+    - model_name: openrouter-llama-3-70b
       litellm_params:
-        model: openai/fake
-        api_key: fake-key
-        api_base: https://exampleopenaiendpoint-production.up.railway.app/
+        model: openrouter/anthropic/claude-3-opus-20240229
+        api_key: ${OPENROUTER_API_KEY}
+        api_base: https://openrouter.ai/api/v1
   general_settings:
     analytics: true
     master_key: os.environ/PROXY_MASTER_KEY
