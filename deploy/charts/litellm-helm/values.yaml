@@ -219,7 +219,18 @@ migrationJob:
   disableSchemaUpdate: false # Skip schema migrations for specific environments. When True, the job will exit with code 0.
   annotations: {}
   ttlSecondsAfterFinished: 120
-  
+global:
+  nodeSelector:
+    if-llm-workload: "true"
+  tolerations:
+    - key: "if-monitoring-pod"
+      operator: "Equal"
+      value: "true"
+      effect: "NoSchedule"
+    - key: "if-llm-workload"
+      operator: "Equal"
+      value: "true"
+      effect: "NoSchedule" 
 # Additional environment variables to be added to the deployment
 envVars: {
     # USE_DDTRACE: "true"
