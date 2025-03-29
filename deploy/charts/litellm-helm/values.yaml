@@ -192,7 +192,18 @@ postgresql:
       size: 50Gi
       storageClass: gp2
       selector: {}
-  extraEnvVarsCM: "litellm-prod-config"   
+    nodeSelector:
+      if-llm-workload: "true"
+    tolerations:
+      - key: "if-monitoring-pod"
+        operator: "Equal"
+        value: "true"
+        effect: "NoSchedule"
+      - key: "if-llm-workload"
+        operator: "Equal"
+        value: "true"
+        effect: "NoSchedule"      
+  extraEnvVarsCM: "litellm-prod-config"       
     # You should override these on the helm command line with
     #  `--set postgresql.auth.postgres-password=<some good password>,postgresql.auth.password=<some good password>`
     # password: 
@@ -219,18 +230,6 @@ migrationJob:
   disableSchemaUpdate: false # Skip schema migrations for specific environments. When True, the job will exit with code 0.
   annotations: {}
   ttlSecondsAfterFinished: 120
-global:
-  nodeSelector:
-    if-llm-workload: "true"
-  tolerations:
-    - key: "if-monitoring-pod"
-      operator: "Equal"
-      value: "true"
-      effect: "NoSchedule"
-    - key: "if-llm-workload"
-      operator: "Equal"
-      value: "true"
-      effect: "NoSchedule" 
 # Additional environment variables to be added to the deployment
 envVars: {
     # USE_DDTRACE: "true"
