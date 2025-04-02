@@ -217,7 +217,6 @@ proxy_config:
         model: "openrouter/google/gemma-7b-it-free"
         api_base: https://openrouter.ai/api/v1
         custom_llm_provider: "openrouter"
-        api_key: os.environ/OPENROUTER_API_KEY
 resources: {}
   # We usually recommend not to specify default resources and to leave this as a conscious
   # choice for the user. This also increases chances charts run on environments with little
