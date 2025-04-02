@@ -85,24 +85,152 @@ masterkeySecretKey: "LITELLM_MASTER_KEY"
 #  Examples: https://github.com/BerriAI/litellm/tree/main/litellm/proxy/example_config_yaml
 #  Reference: https://docs.litellm.ai/docs/proxy/configs
 proxy_config:
-  model_list:
-    # At least one model must exist for the proxy to start.
-    - model_name: gpt-3.5-turbo
-      litellm_params:
-        model: gpt-3.5-turbo
-        api_key: eXaMpLeOnLy
-    - model_name: fake-openai-endpoint
-      litellm_params:
-        model: openai/fake
-        api_key: fake-key
-        api_base: https://exampleopenaiendpoint-production.up.railway.app/
   general_settings:
     analytics: true
     master_key: os.environ/PROXY_MASTER_KEY
     admin_ui:
       username: os.environ/UI_USERNAME
       password: os.environ/UI_PASSWORD
-
+  model_list:
+    # At least one model must exist for the proxy to start.
+    - model_name: gpt-3.5-turbo
+      litellm_params:
+        model: gpt-3.5-turbo
+        api_key: eXaMpLeOnLy
+    # Claude 3 Models (Latest generation)
+    - model_name: openrouter-claude-3-opus
+      litellm_params:
+        model: openrouter/anthropic/claude-3-opus-20240229
+        api_base: https://openrouter.ai/api/v1
+        custom_llm_provider: "openrouter"
+    
+    - model_name: openrouter-claude-3-sonnet
+      litellm_params:
+        model: openrouter/anthropic/claude-3-sonnet-20240229
+        api_base: https://openrouter.ai/api/v1
+        custom_llm_provider: "openrouter"
+    
+    - model_name: openrouter-claude-3-haiku
+      litellm_params:
+        model: openrouter/anthropic/claude-3-haiku-20240307
+        api_base: https://openrouter.ai/api/v1
+        custom_llm_provider: "openrouter"
+    
+    # Claude 2 Models
+    - model_name: openrouter-claude-2
+      litellm_params:
+        model: openrouter/anthropic/claude-2
+        api_base: https://openrouter.ai/api/v1
+        custom_llm_provider: "openrouter"
+    
+    - model_name: openrouter-claude-2.1
+      litellm_params:
+        model: openrouter/anthropic/claude-2.1
+        api_base: https://openrouter.ai/api/v1
+        custom_llm_provider: "openrouter"
+    
+    # Claude Instant Models
+    - model_name: openrouter-claude-instant-1.2
+      litellm_params:
+        model: openrouter/anthropic/claude-instant-1.2
+        api_base: https://openrouter.ai/api/v1
+        custom_llm_provider: "openrouter"
+    # Gemini 1.5 Models (Latest generation)
+    - model_name: openrouter-gemini-1.5-pro
+      litellm_params:
+        model: openrouter/google/gemini-1.5-pro-latest
+        api_base: https://openrouter.ai/api/v1
+        custom_llm_provider: "openrouter"
+    
+    - model_name: openrouter-gemini-1.5-flash
+      litellm_params:
+        model: openrouter/google/gemini-1.5-flash-latest
+        api_base: https://openrouter.ai/api/v1
+        custom_llm_provider: "openrouter"
+    
+    # Gemini 1.0 Models
+    - model_name: openrouter-gemini-pro
+      litellm_params:
+        model: openrouter/google/gemini-pro
+        api_base: https://openrouter.ai/api/v1
+        custom_llm_provider: "openrouter"
+    
+    - model_name: openrouter-gemini-pro-vision
+      litellm_params:
+        model: openrouter/google/gemini-pro-vision
+        api_base: https://openrouter.ai/api/v1
+        custom_llm_provider: "openrouter" 
+    # GPT-4 Latest Generation Models
+    - model_name: openrouter-gpt-4o
+      litellm_params:
+        model: openrouter/openai/gpt-4o
+        api_base: https://openrouter.ai/api/v1
+        custom_llm_provider: "openrouter"
+    
+    - model_name: openrouter-gpt-4o-mini
+      litellm_params:
+        model: openrouter/openai/gpt-4o-mini
+        api_base: https://openrouter.ai/api/v1
+        custom_llm_provider: "openrouter"
+    
+    # GPT-4 Turbo Models
+    - model_name: openrouter-gpt-4-turbo
+      litellm_params:
+        model: openrouter/openai/gpt-4-turbo
+        api_base: https://openrouter.ai/api/v1
+        custom_llm_provider: "openrouter"
+    
+    - model_name: openrouter-gpt-4-turbo-preview
+      litellm_params:
+        model: openrouter/openai/gpt-4-turbo-preview
+        api_base: https://openrouter.ai/api/v1
+        custom_llm_provider: "openrouter"
+    
+    # GPT-4 Vision Models
+    - model_name: openrouter-gpt-4-vision
+      litellm_params:
+        model: openrouter/openai/gpt-4-vision-preview
+        api_base: https://openrouter.ai/api/v1
+        custom_llm_provider: "openrouter"
+    
+    # GPT-4 Standard Models
+    - model_name: openrouter-gpt-4
+      litellm_params:
+        model: openrouter/openai/gpt-4
+        api_base: https://openrouter.ai/api/v1
+        custom_llm_provider: "openrouter"
+    
+    - model_name: openrouter-gpt-4-32k
+      litellm_params:
+        model: openrouter/openai/gpt-4-32k
+        api_base: https://openrouter.ai/api/v1
+        custom_llm_provider: "openrouter"
+    
+    # GPT-3.5 Models
+    - model_name: openrouter-gpt-3.5-turbo
+      litellm_params:
+        model: openrouter/openai/gpt-3.5-turbo
+        api_base: https://openrouter.ai/api/v1
+        custom_llm_provider: "openrouter"
+    
+    - model_name: openrouter-gpt-3.5-turbo-16k
+      litellm_params:
+        model: openrouter/openai/gpt-3.5-turbo-16k
+        api_base: https://openrouter.ai/api/v1
+        custom_llm_provider: "openrouter"
+    
+    # Dalle Models for image generation
+    - model_name: openrouter-dalle-3
+      litellm_params:
+        model: openrouter/openai/dall-e-3
+        api_base: https://openrouter.ai/api/v1
+        custom_llm_provider: "openrouter"
+    
+    - model_name: openrouter-dalle-2
+      litellm_params:
+        model: openrouter/openai/dall-e-2
+        api_base: https://openrouter.ai/api/v1
+        custom_llm_provider: "openrouter"
 resources: {}
   # We usually recommend not to specify default resources and to leave this as a conscious
   # choice for the user. This also increases chances charts run on environments with little
