@@ -231,6 +231,27 @@ proxy_config:
         model: openrouter/openai/dall-e-2
         api_base: https://openrouter.ai/api/v1
         custom_llm_provider: "openrouter"
+  model_list:
+    # Gemma 7B Models
+    - model_name: openrouter-gemma-7b
+      litellm_params:
+        model: openrouter/google/gemma-7b-it
+        api_base: https://openrouter.ai/api/v1
+        custom_llm_provider: "openrouter"
+    
+    # Gemma 2B Models
+    - model_name: openrouter-gemma-2b
+      litellm_params:
+        model: openrouter/google/gemma-2b-it
+        api_base: https://openrouter.ai/api/v1
+        custom_llm_provider: "openrouter"
+    
+    # High-speed Gemma via Groq
+    - model_name: openrouter-gemma-7b-groq
+      litellm_params:
+        model: openrouter/groq/gemma-7b-it
+        api_base: https://openrouter.ai/api/v1
+        custom_llm_provider: "openrouter"        
 resources: {}
   # We usually recommend not to specify default resources and to leave this as a conscious
   # choice for the user. This also increases chances charts run on environments with little
