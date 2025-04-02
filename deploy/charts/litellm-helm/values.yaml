@@ -186,13 +186,6 @@ proxy_config:
         api_base: https://openrouter.ai/api/v1
         custom_llm_provider: "openrouter"
     
-    # GPT-4 Vision Models
-    - model_name: openrouter-gpt-4-vision
-      litellm_params:
-        model: openrouter/openai/gpt-4-vision-preview
-        api_base: https://openrouter.ai/api/v1
-        custom_llm_provider: "openrouter"
-    
     # GPT-4 Standard Models
     - model_name: openrouter-gpt-4
       litellm_params:
@@ -219,11 +212,10 @@ proxy_config:
         api_base: https://openrouter.ai/api/v1
         custom_llm_provider: "openrouter"
 
-    - model_name: openrouter-gemma-7b-it
-      litellm_params:
-        model: openrouter/google/gemma-7b-it
-        api_base: https://openrouter.ai/api/v1
-        custom_llm_provider: "openrouter"
+    - model: "openrouter/google/gemma-7b-it-free"
+      api_base: https://openrouter.ai/api/v1
+      custom_llm_provider: "openrouter"
+      api_key: os.environ/OPENROUTER_API_KEY
 resources: {}
   # We usually recommend not to specify default resources and to leave this as a conscious
   # choice for the user. This also increases chances charts run on environments with little
