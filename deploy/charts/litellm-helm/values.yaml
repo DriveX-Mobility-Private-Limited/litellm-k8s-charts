@@ -205,7 +205,8 @@ proxy_config:
         model: openrouter/openai/gpt-3.5-turbo
         api_base: https://openrouter.ai/api/v1
         custom_llm_provider: "openrouter"
-    
+
+    # Gemma Models
     - model_name: openrouter-gemma-3-27b-free
       litellm_params:
         model: "openrouter/google/gemma-3-27b-it:free"
@@ -227,6 +228,41 @@ proxy_config:
     - model_name: openrouter-gemma-3-12b-free
       litellm_params:
         model: "openrouter/google/gemma-3-12b-it:free"
+        api_base: "https://openrouter.ai/api/v1"
+        custom_llm_provider: "openrouter"
+    - model_name: openrouter-gemma-3-27b-free
+      litellm_params:
+        model: "openrouter/google/gemma-3-27b-it:free"
+        api_base: "https://openrouter.ai/api/v1"
+        custom_llm_provider: "openrouter"
+
+    - model_name: openrouter-gemma-3-1b-free
+      litellm_params:
+        model: "openrouter/google/gemma-3-1b-it:free"
+        api_base: "https://openrouter.ai/api/v1"
+        custom_llm_provider: "openrouter"
+
+    - model_name: openrouter-gemma-3-4b-free
+      litellm_params:
+        model: "openrouter/google/gemma-3-4b-it:free"
+        api_base: "https://openrouter.ai/api/v1"
+        custom_llm_provider: "openrouter"
+
+    - model_name: openrouter-gemma-3-4b
+      litellm_params:
+        model: "openrouter/google/gemma-3-4b-it"
+        api_base: "https://openrouter.ai/api/v1"
+        custom_llm_provider: "openrouter"
+
+    - model_name: openrouter-gemma-3-12b-free
+      litellm_params:
+        model: "openrouter/google/gemma-3-12b-it:free"
+        api_base: "https://openrouter.ai/api/v1"
+        custom_llm_provider: "openrouter"
+
+    - model_name: openrouter-gemma-3-12b
+      litellm_params:
+        model: "openrouter/google/gemma-3-12b-it"
         api_base: "https://openrouter.ai/api/v1"
         custom_llm_provider: "openrouter"
 
