@@ -231,7 +231,6 @@ proxy_config:
         model: openrouter/openai/dall-e-2
         api_base: https://openrouter.ai/api/v1
         custom_llm_provider: "openrouter"
-  model_list:
     # Gemma 7B Models
     - model_name: openrouter-gemma-7b
       litellm_params:
