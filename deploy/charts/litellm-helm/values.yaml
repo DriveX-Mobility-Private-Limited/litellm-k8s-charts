@@ -226,11 +226,11 @@ proxy_config:
     
     # Removing the invalid Groq/Gemma model that's causing errors
     # If you want to try other Groq models, here's a valid one:
-    - model_name: openrouter-llama-3-8b-groq
+    - model_name: openrouter-gemma-2b-it
       litellm_params:
-        model: openrouter/groq/llama-3-8b-instruct
+        model: "openrouter/google/gemma-2b-it"
         api_base: https://openrouter.ai/api/v1
-        custom_llm_provider: "openrouter" 
+        custom_llm_provider: "openrouter"
 resources: {}
   # We usually recommend not to specify default resources and to leave this as a conscious
   # choice for the user. This also increases chances charts run on environments with little
