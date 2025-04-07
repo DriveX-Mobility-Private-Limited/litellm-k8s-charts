@@ -107,12 +107,37 @@ proxy_config:
         model: gpt-3.5-turbo
         api_key: eXaMpLeOnLy
     # Claude 3 Models (Latest generation)
+          # Direct Gemini models
+  # Direct Gemini models
+    - model_name: gemini-pro
+      litellm_params:
+        model: gemini/gemini-pro
+        api_key: os.environ/GOOGLE_API_KEY
+    - model_name: gemini-pro-vision
+      litellm_params:
+        model: gemini/gemini-pro-vision
+        api_key: os.environ/GOOGLE_API_KEY
+    - model_name: gemini-1.5-pro
+      litellm_params:
+        model: gemini/gemini-1.5-pro
+        api_key: os.environ/GOOGLE_API_KEY
+    - model_name: gemini-1.5-flash
+      litellm_params:
+        model: gemini/gemini-1.5-flash
+        api_key: os.environ/GOOGLE_API_KEY
+    - model_name: gemini-1.5-pro-vision
+      litellm_params:
+        model: gemini/gemini-1.5-pro-vision
+        api_key: os.environ/GOOGLE_API_KEY
+    - model_name: gemini-1.5-flash-preview
+      litellm_params:
+        model: gemini/gemini-1.5-flash-preview
+        api_key: os.environ/GOOGLE_API_KEY
     - model_name: openrouter-claude-3-opus
       litellm_params:
         model: openrouter/anthropic/claude-3-opus-20240229
         api_base: https://openrouter.ai/api/v1
-        custom_llm_provider: "openrouter"
-    
+        custom_llm_provider: "openrouter"    
     - model_name: openrouter-claude-3-sonnet
       litellm_params:
         model: openrouter/anthropic/claude-3-sonnet-20240229
