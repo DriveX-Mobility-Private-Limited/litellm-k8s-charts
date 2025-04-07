@@ -65,6 +65,15 @@ ingress:
     kubernetes.io/tls-acme: "true"
     cert-manager.io/cluster-issuer: letsencrypt-prod
     nginx.ingress.kubernetes.io/use-forwarded-headers: "true"
+    nginx.ingress.kubernetes.io/enable-underscores-in-headers: "true"
+    nginx.ingress.kubernetes.io/proxy-pass-headers: "Authorization"
+    nginx.ingress.kubernetes.io/proxy-set-headers: "/etc/nginx/proxy-headers"
+    nginx.ingress.kubernetes.io/proxy-http-version: "1.1"
+    nginx.ingress.kubernetes.io/proxy-buffering: "off"
+    nginx.ingress.kubernetes.io/client-max-body-size: "0"
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "36000s"
+    nginx.ingress.kubernetes.io/proxy-redirect-off: "true"
+    nginx.ingress.kubernetes.io/proxy-body-size: "200m"    
   hosts:
     - host: llmproxy.drivex.in
       paths:
