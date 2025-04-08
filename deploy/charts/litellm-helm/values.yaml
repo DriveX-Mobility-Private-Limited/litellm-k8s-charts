@@ -100,6 +100,25 @@ proxy_config:
     admin_ui:
       username: os.environ/UI_USERNAME
       password: os.environ/UI_PASSWORD
+    # Configure fallbacks
+    # default_model_health: os.environ/DEFAULT_MODEL_HEALTH
+    # fallbacks: [
+    #   {
+    #     # Gemini fallbacks
+    #     "gemini-1.5-pro": ["gemini-1.5-flash", "gemini-pro", "gpt-4o"],
+    #     "gemini-1.5-flash": ["gemini-pro", "gemini-1.5-pro", "gpt-4o-mini"]
+    #     # "gemini-pro": ["gemini-1.5-flash", "gpt-3.5-turbo"],
+    #     # "gemini-1.5-ultra": ["gemini-1.5-pro", "gemini-1.5-flash", "gpt-4o"],
+
+    #     # # OpenAI fallbacks
+    #     # "gpt-4o": ["gpt-4-turbo", "gemini-1.5-ultra", "gemini-1.5-pro"],
+    #     # "gpt-4o-mini": ["gpt-3.5-turbo", "gemini-1.5-flash", "gemini-pro"],
+    #     # "gpt-4-turbo": ["gpt-4o", "gemini-1.5-ultra"],
+    #     # "gpt-3.5-turbo": ["gpt-4o-mini", "gemini-pro"]
+    #   }
+    # ]
+    # # Configure health check
+    # health_check_interval: 300
   model_list:
     # At least one model must exist for the proxy to start.
     - model_name: gpt-3.5-turbo
