@@ -187,7 +187,7 @@ proxy_config:
         api_key: os.environ/OPENAI_API_KEY
     - model_name: whisper-1
       litellm_params:
-        model: audio/whisper-1
+        model: openai/whisper-1
         api_key: os.environ/OPENAI_API_KEY
         api_base: https://api.openai.com/v1
   # Direct Gemini models
