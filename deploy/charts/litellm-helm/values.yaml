@@ -187,7 +187,7 @@ proxy_config:
         api_key: os.environ/OPENAI_API_KEY
     - model_name: whisper-1
       litellm_params:
-        model: whisper-1
+        model: audio/whisper-1
         api_key: os.environ/OPENAI_API_KEY  
   # Direct Gemini models
     - model_name: gemini-pro
