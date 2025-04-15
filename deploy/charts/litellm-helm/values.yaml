@@ -224,6 +224,27 @@ proxy_config:
         model: gemini/gemini-2.5-pro-experimental
         api_key: os.environ/GEMINI_API_KEY
 
+ # Anthropic Claude Models
+    - model_name: claude-3.5-sonnet
+      litellm_params:
+        model: anthropic/claude-3-5-sonnet-20240620
+        api_key: os.environ/ANTHROPIC_API_KEY
+    - model_name: claude-3.5-haiku
+      litellm_params:
+        model: anthropic/claude-3-5-haiku-20241022
+        api_key: os.environ/ANTHROPIC_API_KEY
+    - model_name: claude-3-opus
+      litellm_params:
+        model: anthropic/claude-3-opus-20240229
+        api_key: os.environ/ANTHROPIC_API_KEY
+    - model_name: claude-3-haiku
+      litellm_params:
+        model: anthropic/claude-3-haiku-20240307
+        api_key: os.environ/ANTHROPIC_API_KEY
+    - model_name: claude-3.7-sonnet
+      litellm_params:
+        model: anthropic/claude-3-7-sonnet-20250219
+        api_key: os.environ/ANTHROPIC_API_KEY
 resources: {}
   # We usually recommend not to specify default resources and to leave this as a conscious
   # choice for the user. This also increases chances charts run on environments with little
