@@ -247,6 +247,14 @@ proxy_config:
       litellm_params:
         model: gemini/gemini-2.5-pro
         api_key: os.environ/GOOGLE_API_KEY
+    - model_name: gemini-live
+      litellm_params:
+        model: gemini/gemini-live
+        api_key: os.environ/GOOGLE_API_KEY
+    - model_name: gemini-nano
+      litellm_params:
+        model: gemini/gemini-nano
+        api_key: os.environ/GOOGLE_API_KEY    
     
     # Anthropic Claude Models
     - model_name: claude-3-7-sonnet
